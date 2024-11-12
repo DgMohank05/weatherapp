@@ -1,0 +1,33 @@
+﻿@model WeatherApp.Models.WeatherViewModel
+
+
+@{
+    ViewData["Title"] = "Weather Information";
+}
+
+<h1>Weather Information</h1>
+
+<!-- Form to enter city name -->
+<form method="get" asp-action="GetWeather">
+    <input type="text" name="city" placeholder="Enter city name" required />
+    <button type="submit">Get Weather</button>
+</form>
+
+<!-- Display weather info if available -->
+@if (Model != null)
+{
+    <div>
+        <h2>@Model.City</h2>
+        <p>Temperature: @Model.Temperature °C</p>
+        <p>Humidity: @Model.Humidity %</p>
+        <p>Weather: @Model.WeatherDescription</p>
+    </div>
+}
+
+<!-- Optional: Display an error message if city not found or API fails -->
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
